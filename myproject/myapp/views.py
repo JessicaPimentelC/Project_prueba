@@ -4,16 +4,19 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
+from .serializer import UserSerializer
 
 User = get_user_model()
 
 @api_view(['POST'])
 def register(request):
-    email = request.data.get('email')
-    password = request.data.get('password')
-    user = User.objects.create_user(email=email, password=password)
-    return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
-
+    if request.method == 'POST':
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 @api_view(['POST'])
 def login(request):
     email = request.data.get('email')
