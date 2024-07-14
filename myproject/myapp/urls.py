@@ -1,9 +1,12 @@
-from django.urls import path
+from django.urls import path,include
 from myapp.views import register, login
-from . import views
+from .views import ApiView
 from rest_framework import routers
 
-
+router = routers.DefaultRouter()
+#router.register('api',ApiView.as_view(),basename='UserManager')
+    
 urlpatterns = [
-    path('register/', views.register, name='register'),    
-    path('login/', views.login, name='login'),]
+    path('api/', include(router.urls)), 
+    path('register/', ApiView.post, name='register'),    
+    path('login/', ApiView.post, name='login'),]
