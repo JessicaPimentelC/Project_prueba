@@ -7,12 +7,14 @@ from rest_framework import generics
 
 User = get_user_model()
 
-class ApiView(generics.ListCreateAPIView):
+#class ApiView(generics.ListCreateAPIView):
+class ApiView(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
-    serializerClass = UsuarioSerializer
-    queryset=User.objects.all()
+    queryset = User.objects.all()
+    serializer_class = UsuarioSerializer
 
-    def create(self, request, *args, **kwargs):
+
+    """def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
@@ -20,7 +22,7 @@ class ApiView(generics.ListCreateAPIView):
             "user": UsuarioSerializer(user, context=self.get_serializer_context()).data,
             "message": "User created successfully.",
         }, status=status.HTTP_201_CREATED)
-
+"""
 
 
 
@@ -44,6 +46,6 @@ def login(request):
         return Response({"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
 
 
-def get(self, request, *args, **kwargs):
-    serializer = UserSerializer(User.objects.all(), many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+#def get(self, request, *args, **kwargs):
+#    serializer = UserSerializer(User.objects.all(), many=True)
+#    return Response(serializer.data, status=status.HTTP_200_OK)
