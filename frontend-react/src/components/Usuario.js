@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { ObtenerUsuarios } from "../api/Usuario-api";
+import { obtenerUsuarios } from "../api/Usuario-api";
 import { UsuarioCard } from "./UsuarioCard";
 
 export function Usuario(){
@@ -8,7 +8,7 @@ export function Usuario(){
     useEffect(() => {
 
         async function cargarUsuario(){
-            const res = await ObtenerUsuarios();
+            const res = await obtenerUsuarios();
             console.log(res);
             setUsuario(res.data);
         }
@@ -17,8 +17,8 @@ export function Usuario(){
     return(
         <div>
             {usuarios.map((usuario) => (
-        <UsuarioCard key='1' usuario={usuario} />
-      ))}
+        <UsuarioCard key={usuario.id} usuario={usuario} />
+    ))}
 
 
         </div>

@@ -8,13 +8,18 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/auth/login/",
+        "http://localhost:8000/myapp/login/",
         { email, password }
+        
       );
       alert(response.data.message);
     } catch (error) {
       console.error(error);
-      alert("Login failed");
+      if (error.response && error.response.data) {
+        alert(error.response.data.error || "Login failed");
+      } else {
+        alert("Login failed");
+      }
     }
   };
 

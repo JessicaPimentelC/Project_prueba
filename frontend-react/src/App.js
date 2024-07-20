@@ -7,6 +7,7 @@ import Login from './components/Login';
 import { UsuarioPage } from "./pages/UsuarioPage"
 import { UsuarioFormPage } from "./pages/UsuarioFormPage"
 import { Navigation } from './components/Navigation';
+import { LoginFormPage } from './pages/LoginFormPage';
 
 
 const App = () => {
@@ -16,11 +17,13 @@ const App = () => {
       <Navigation/>
         <Routes>
           
-          <Route path="/" element={<Navigate to="/register"/>}/>
+          <Route path="/" element={<Navigate to="/login"/>}/>
           <Route path="/register" element={<Register/>}/>
-          <Route path="/login" element={<Login/>} />
+          <Route path="/login" element={<LoginFormPage/>} />
           <Route path="/usuario" element={<UsuarioPage/>}/>
           <Route path="/usuario-create" element={<UsuarioFormPage/>}/>
+          <Route path="/usuario/:id" element={<UsuarioFormPage/>}/>
+
         </Routes>
       </div>
     </Router>
