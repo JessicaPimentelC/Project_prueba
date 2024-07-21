@@ -28,19 +28,19 @@ def Register(request):
 @api_view(['POST'])
 def Login(request):
     serializer_class = UsuarioSerializer
-    email = request.data.get('email')
+    username = request.data.get('username')
     password = request.data.get('password')
-    print(f"Email: {email}, Password: {password}")
+    print(f"username: {username}, Password: {password}")
 
     try:
-        user = User.objects.get(email=email)
+        user = User.objects.get(username=username)
         print(f"Usuario encontrado: {user}")
     except User.DoesNotExist:
         print("Usuario no encontrado")
         return Response({'message': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
 
     print("Resultado de authenticate 1:", user)
-    user = authenticate(request, email=email, password=password)
+    user = authenticate(request, username=username, password=password)
     print("Resultado de authenticate 2:", user)
 
     if user is not None:

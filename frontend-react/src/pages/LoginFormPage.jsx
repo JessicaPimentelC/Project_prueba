@@ -43,13 +43,13 @@ return (
     <div>
     <form onSubmit={onSubmit}>
         <div>
-        <label>Email</label>
+        <label>Username</label>
         <input
-            type="email"
-            placeholder="Email"
-            {...register("email", { required: true })}
+            type="text"
+            placeholder="Username"
+            {...register("username", { required: true })}
         />
-        {errors.email && <span>Email es obligatorio</span>}
+        {errors.username && <span>Username es obligatorio</span>}
         </div>
         <div>
         <label>Contraseña</label>
